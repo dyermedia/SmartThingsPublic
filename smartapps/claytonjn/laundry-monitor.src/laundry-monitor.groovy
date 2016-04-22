@@ -31,7 +31,7 @@ preferences {
             input "washers", "capability.powerMeter", title: "Washing Machine(s)", multiple: true, required: false
             input "dryers", "capability.powerMeter", title: "Dryer(s)", multiple: true, required: false
             input "speakers", "capability.musicPlayer", title: "Speaker(s)", multiple: true, required: false
-            input "modes", "mode", title: "Mode(s) for speaker ", multiple: true, required: true
+            input "modes", "mode", title: "Mode(s) for speaker(s)", multiple: true, required: false
             input("recipients", "contact", title: "Send notifications to", multiple: true)
         }
     }
