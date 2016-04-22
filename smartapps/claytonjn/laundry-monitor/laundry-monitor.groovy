@@ -19,9 +19,9 @@ definition(
     author: "Clayton Nummer",
     description: "Sends a notification when the laundry is done.",
     category: "My Apps",
-    iconUrl: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/personal/icons/claytonjn.png",
-    iconX2Url: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/personal/icons/claytonjn@2x.png",
-    iconX3Url: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/personal/icons/claytonjn@3x.png")
+    iconUrl: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn.png",
+    iconX2Url: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn@2x.png",
+    iconX3Url: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn@3x.png")
 
 
 preferences {
