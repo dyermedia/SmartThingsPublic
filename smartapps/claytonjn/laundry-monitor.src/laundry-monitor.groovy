@@ -32,7 +32,7 @@ preferences {
             input "dryers", "capability.powerMeter", title: "Dryer(s)", multiple: true, required: false
             input "speakers", "capability.musicPlayer", title: "Speaker(s)", multiple: true, required: false
             input "modes", "mode", title: "Mode(s) for speaker(s)", multiple: true, required: false
-            input("recipients", "contact", title: "Send notifications to", multiple: true)
+            input("recipients", "contact", title: "Send notifications to", multiple: true, required: false)
         }
     }
 }
