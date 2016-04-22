@@ -32,7 +32,9 @@ preferences {
             input "dryers", "capability.powerMeter", title: "Dryer(s)", multiple: true, required: false
             input "speakers", "capability.musicPlayer", title: "Speaker(s)", multiple: true, required: false
             input "modes", "mode", title: "Mode(s) for speaker(s)", multiple: true, required: false
-            input("recipients", "contact", title: "Send notifications to", multiple: true, required: false)
+            input("recipients", "contact", title: "Send notifications to", multiple: true, required: false) {
+                input "sendPush", "bool", title: "Send push notifications?", required: false
+            }
         }
     }
 }
@@ -61,11 +63,13 @@ void dryerHandler(evt) { laundryHandler("Drying", evt) }
 void laundryHandler(verb, evt) {
     if (Double.parseDouble(evt.value) == 0 && evt.isStateChange() == true) {
 
+        log.debug "Notification: Done ${verb} clothes"
+
         // check that contact book is enabled and recipients selected
         if (location.contactBookEnabled && recipients) {
             sendNotificationToContacts("Done ${verb} clothes", recipients)
         } else {
-            sendPush("Done ${verb} clothes")
+            if (sendPush) { sendPush("Done ${verb} clothes") }
         }
 
         if (location.mode in settings.modes) {
