@@ -57,31 +57,39 @@ def initialize() {
     subscribe(settings.dryers, "power", dryerHandler)
 }
 
-void washerHandler(evt) { laundryHandler("Washing", evt) }
-void dryerHandler(evt) { laundryHandler("Drying", evt) }
+void washerHandler(evt) {
+    laundryHandler("Washing", evt)
+    state.washerPower = evt.numericValue
+}
+void dryerHandler(evt) {
+    laundryHandler("Drying", evt)
+    state.dryerPower = evt.numericValue
+}
 
 void laundryHandler(verb, evt) {
-    if (Double.parseDouble(evt.value) == 0 && evt.isStateChange() == true) {
+    if((verb == "Washing" && state.washerPower > 0) || (verb == "Drying" && state.dryerPower > 0)) {
+        if (evt.numericValue == 0) {
 
-        log.debug "Notification: Done ${verb} clothes"
+            log.debug "Notification: Done ${verb} clothes"
 
-        // check that contact book is enabled and recipients selected
-        if (location.contactBookEnabled && recipients) {
-            sendNotificationToContacts("Done ${verb} clothes", recipients)
-        } else {
-            if (sendPush) { sendPush("Done ${verb} clothes") }
-        }
+            // check that contact book is enabled and recipients selected
+            if (location.contactBookEnabled && recipients) {
+                sendNotificationToContacts("Done ${verb} clothes", recipients)
+            } else {
+                if (sendPush) { sendPush("Done ${verb} clothes") }
+            }
 
-        if (location.mode in settings.modes) {
-            for (speaker in speakers) {
-                //Check if speaker is playing
-                def isOn = speaker.currentValue("switch")
-                //If it is, check what it's playing
-                if (isOn == "on") { def isPlaying = speaker.currentValue("trackData") }
-                //Speak
-                speaker.playText("Done ${verb} clothes")
-                //Resume playing if it was before
-                if (isOn == "on") { speaker.restoreTrack(isPlaying) }
+            if (location.mode in settings.modes) {
+                for (speaker in speakers) {
+                    //Check if speaker is playing
+                    def isOn = speaker.currentValue("switch")
+                    //If it is, check what it's playing
+                    if (isOn == "on") { def isPlaying = speaker.currentValue("trackData") }
+                    //Speak
+                    speaker.playText("Done ${verb} clothes")
+                    //Resume playing if it was before
+                    if (isOn == "on") { speaker.restoreTrack(isPlaying) }
+                }
             }
         }
     }
