@@ -17,7 +17,7 @@ definition(
     name: "Outdoor Lighting - Sunrise/Sunset",
     namespace: "claytonjn",
     author: "claytonjn",
-    description: "Turns on the outside lights at sunset\u002C turns them off at sunrise.",
+    description: "Turns on the outside lights at sunset\, turns them off at sunrise.",
     category: "My Apps",
     iconUrl: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn.png",
     iconX2Url: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn@2x.png",
@@ -27,7 +27,7 @@ definition(
 preferences {
 	page(name: "page", install:true, uninstall: true) {
         section("Title") {
-        	paragraph "Turns on the outside lights at sunset\u002C turns them off at sunrise."
+        	paragraph "Turns on the outside lights at sunset\, turns them off at sunrise."
             input "lights", "capability.switch", title: "Light(s)", multiple: true
             input("recipients", "contact", title: "Send notifications to", multiple: true)
         }
