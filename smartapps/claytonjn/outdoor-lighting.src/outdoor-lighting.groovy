@@ -1,5 +1,5 @@
 /**
- *  Outdoor Lighting - Sunrise, Sunset
+ *  Automatic Outdoor Lighting
  *
  *  Copyright 2016 Clayton Nummer
  *
@@ -14,7 +14,7 @@
  *
  */
 definition(
-    name: "Outdoor Lighting - Sunrise, Sunset",
+    name: "Automatic Outdoor Lighting",
     namespace: "claytonjn",
     author: "claytonjn",
     description: "Turns on the outside lights at sunset, turns them off at sunrise.",
