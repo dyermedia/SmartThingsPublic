@@ -25,7 +25,7 @@ definition(
 
 
 preferences {
-	page(name: "page", install: true, uninstall: false) {
+	page(name: "page", install: true, uninstall: true) {
         section("Title") {
             paragraph "Turns on the Second Floor Stairs light when there's motion betwen sunset and sunrise."
             input "lights", "capability.switch", title: "Light(s)", multiple: true, required: true
