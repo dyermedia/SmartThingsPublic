@@ -27,10 +27,10 @@ definition(
 preferences {
 	page(name: "page", install: true, uninstall: false) {
         section("Title") {
-        	paragraph "Trigger a refresh on the Harmony Hub when various things happen"
+        	paragraph "Trigger a refresh on a device when various things happen"
             input "lights", "capability.switch", title: "Light Trigger(s)", multiple: true, required: false
             input "motions", "capability.motionSensor", title: "Motion Trigger(s)", multiple: true, required: false
-            input "refreshs", "capability.refresh", title: "Harmony Hub(s)", multiple: true, required: true
+            input "refreshs", "capability.refresh", title: "Device(s) to refresh", multiple: true, required: true
         }
     }
 }
@@ -49,10 +49,16 @@ def updated() {
 }
 
 def initialize() {
-	subscribe(lights, "switch", evtHandler)
+    subscribe(lights, "switch", evtHandler)
     subscribe(motions, "motion", evtHandler)
+    subscribe(app, appHandler)
 }
 
 void evtHandler(evt) {
 	settings.refreshs?.refresh()
+}
+
+void appHandler(evt) {
+    evtHandler(evt)
+}
 }
