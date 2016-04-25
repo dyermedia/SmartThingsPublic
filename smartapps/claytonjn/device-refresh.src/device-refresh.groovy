@@ -27,10 +27,11 @@ definition(
 preferences {
 	page(name: "page", install: true, uninstall: false) {
         section("Title") {
-        	paragraph "Trigger a refresh on a device when various things happen"
+            paragraph "Trigger a refresh on a device when various things happen"
             input "lights", "capability.switch", title: "Light Trigger(s)", multiple: true, required: false
             input "motions", "capability.motionSensor", title: "Motion Trigger(s)", multiple: true, required: false
             input "refreshs", "capability.refresh", title: "Device(s) to refresh", multiple: true, required: true
+            label title: "Assign a name", required: false
         }
     }
 }
