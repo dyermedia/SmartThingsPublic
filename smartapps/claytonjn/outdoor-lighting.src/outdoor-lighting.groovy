@@ -1,5 +1,5 @@
 /**
- *  Outdoor Lighting: Sunrise-Sunset
+ *  Outdoor Lighting - Sunrise/Sunset
  *
  *  Copyright 2016 Clayton Nummer
  *
@@ -14,7 +14,7 @@
  *
  */
 definition(
-    name: "Outdoor Lighting: Sunrise-Sunset",
+    name: "Outdoor Lighting - Sunrise/Sunset",
     namespace: "claytonjn",
     author: "claytonjn",
     description: "Turns on the outside lights at sunset, turns them off at sunrise.",
@@ -25,7 +25,7 @@ definition(
 
 
 preferences {
-	page(name: "page", install: true, uninstall: true) {
+	page(name: "page", install:true, uninstall: true) {
         section("Title") {
         	paragraph "Turns on the outside lights at sunset, turns them off at sunrise."
             input "lights", "capability.switch", title: "Light(s)", multiple: true
