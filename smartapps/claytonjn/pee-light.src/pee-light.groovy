@@ -25,7 +25,7 @@ definition(
 
 
 preferences {
-	page(name: "page", install: true, uninstall: false) {
+	page(name: "page", install: true, uninstall: true) {
         section("Title") {
             paragraph "Turns on light(s) when someone uses the bathroom in the middle of the night"
             input "lights", "capability.switch", title: "Light(s)", multiple: true
