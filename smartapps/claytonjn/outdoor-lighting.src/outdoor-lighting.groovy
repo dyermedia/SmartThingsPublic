@@ -2,7 +2,7 @@ definition(
     name: "Outdoor Lighting",
     namespace: "claytonjn",
     author: "claytonjn",
-    description: "Turns on the outside lights at sunset\, turns them off at sunrise.",
+    description: "Turns on the outside lights at sunset turns them off at sunrise",
     category: "My Apps",
     iconUrl: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn.png",
     iconX2Url: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn@2x.png",
@@ -11,7 +11,7 @@ definition(
 
 preferences {
 
-  paragraph "Turns on the outside lights at sunset\, turns them off at sunrise."
+  paragraph "Turns on the outside lights at sunset turns them off at sunrise."
 
 }
 
