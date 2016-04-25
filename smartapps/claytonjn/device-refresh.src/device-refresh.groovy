@@ -25,7 +25,7 @@ definition(
 
 
 preferences {
-	page(name: "page", install: true, uninstall: false) {
+	page(name: "page", install: true, uninstall: true) {
         section("Title") {
             paragraph "Trigger a refresh on a device when various things happen"
             input "lights", "capability.switch", title: "Light Trigger(s)", multiple: true, required: false
