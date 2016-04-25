@@ -62,4 +62,3 @@ void evtHandler(evt) {
 void appHandler(evt) {
     evtHandler(evt)
 }
-}
