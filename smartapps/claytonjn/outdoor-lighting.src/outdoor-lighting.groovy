@@ -132,7 +132,7 @@ void sunsetHandler(evt) {
             for (light in settings.lights) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
-                    light.setColor([hue: 7, saturation: 90, switch: "on"])
+                    light.setColor([hue: 8, saturation: 82, switch: "on"])
                 }
                 else if ("Color Temperature" in light.capabilities?.name) {
                     light.setColorTemperature(2700)
@@ -219,7 +219,7 @@ void sunsetHandler(evt) {
             for (light in settings.lights) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
-                    light.setColor([hue: 7, saturation: 90, switch: "on"])
+                    light.setColor([hue: 8, saturation: 82, switch: "on"])
                 }
                 else if ("Color Temperature" in light.capabilities?.name) {
                     light.setColorTemperature(2700)
@@ -376,7 +376,7 @@ void sunsetHandler(evt) {
             for (light in settings.lights) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
-                    light.setColor([hue: 7, saturation: 90, switch: "on"])
+                    light.setColor([hue: 8, saturation: 82, switch: "on"])
                 }
                 else if ("Color Temperature" in light.capabilities?.name) {
                     light.setColorTemperature(2700)
