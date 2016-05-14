@@ -29,6 +29,7 @@ preferences {
         section("Title") {
         	paragraph "Sends a notification when a sensor is tampered with."
             input "tampers", "capability.tamperAlert", title: "Sensor(s)", multiple: true, required: false
+            input "motions", "capability.motionSensor", title: "Motion Sensor(s)", multiple: true, required: false
             input("recipients", "contact", title: "Send notifications to", multiple: true, required: false) {
                 input "sendPush", "bool", title: "Send push notifications?", required: false
             }
@@ -51,6 +52,7 @@ def updated() {
 
 def initialize() {
     subscribe(settings.tampers, "tamper.detected", tamperHandler)
+    subscribe(settings.motions, "tamper.detected", tamperHandler)
 }
 
 void tamperHandler(evt) {
