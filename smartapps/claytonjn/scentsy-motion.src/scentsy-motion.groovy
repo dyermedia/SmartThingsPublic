@@ -21,6 +21,7 @@ preferences {
             paragraph "Turn on Scentsy(s) when there's motion."
             input "scentsys", "capability.switch", title: "Scentsy(s)", multiple: true
             input "motions", "capability.motionSensor", title: "Motion Sensor(s)", multiple: true
+            label title: "Assign a name", required: false
         }
     }
 }
