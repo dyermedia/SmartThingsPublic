@@ -65,7 +65,7 @@ void onHandler(evt) {
 }
 
 void offHandler(evt) {
-	if(evt.numericValue <= 1) {
+    if(evt.device.currentValue("switch") == "on" && evt.numericValue <= 1) {
         outlets?.off()
 
         // check that contact book is enabled and recipients selected
