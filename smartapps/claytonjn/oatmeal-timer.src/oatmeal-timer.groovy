@@ -54,23 +54,36 @@ def initialize() {
 }
 
 void onHandler(evt) {
-    outlets?.on()
+    settings.outlets?.on()
+    runIn(60, onNotificationHandler)
+}
 
-    // check that contact book is enabled and recipients selected
-    if (location.contactBookEnabled && recipients) {
-        sendNotificationToContacts("Oatmeal turned on", recipients)
-    } else {
-        if (sendPush) { sendPush("Oatmeal turned on") }
+void onNotificationHandler() {
+    def on = false
+    for (outlet in settings.outlets) {
+        if (outlet.currentValue("power") >= 1) {
+            on = true
+        } else {
+            outlet.off()
+        }
+    }
+    if (on == true) {
+        // check that contact book is enabled and recipients selected
+        if (location.contactBookEnabled && settings.recipients) {
+            sendNotificationToContacts("Oatmeal turned on", settings.recipients)
+        } else {
+            if (sendPush) { sendPush("Oatmeal turned on") }
+        }
     }
 }
 
 void offHandler(evt) {
     if(evt.device.currentValue("switch") == "on" && evt.numericValue <= 1) {
-        outlets?.off()
+        settings.outlets?.off()
 
         // check that contact book is enabled and recipients selected
-        if (location.contactBookEnabled && recipients) {
-            sendNotificationToContacts("Oatmeal turned off", recipients)
+        if (location.contactBookEnabled && settings.recipients) {
+            sendNotificationToContacts("Oatmeal turned off", settings.recipients)
         } else {
             if (sendPush) { sendPush("Oatmeal turned off") }
         }
