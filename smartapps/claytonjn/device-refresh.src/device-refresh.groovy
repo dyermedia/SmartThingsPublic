@@ -26,7 +26,7 @@ definition(
 
 preferences {
 	page(name: "page", install: true, uninstall: true) {
-        section("Title") {
+        section("Preferences") {
             paragraph "Trigger a refresh on a device when various things happen"
             input "lights", "capability.switch", title: "Light Trigger(s)", multiple: true, required: false
             input "motions", "capability.motionSensor", title: "Motion Trigger(s)", multiple: true, required: false
@@ -52,13 +52,9 @@ def updated() {
 def initialize() {
     subscribe(lights, "switch", evtHandler)
     subscribe(motions, "motion", evtHandler)
-    subscribe(app, appHandler)
+    subscribe(app, evtHandler)
 }
 
 void evtHandler(evt) {
 	settings.refreshs?.refresh()
-}
-
-void appHandler(evt) {
-    evtHandler(evt)
 }
