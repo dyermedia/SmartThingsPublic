@@ -65,8 +65,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (51/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (51/360)*100, saturation: 100, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (51/360)*100, saturation: 100, switch: "on"])
                 }
             }
@@ -82,8 +83,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (350/360)*100, saturation: 24.7, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (350/360)*100, saturation: 24.7, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (350/360)*100, saturation: 24.7, switch: "on"])
                 }
             }
@@ -99,8 +101,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (120/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (120/360)*100, saturation: 100, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (120/360)*100, saturation: 100, switch: "on"])
                 }
             }
@@ -116,8 +119,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (350/360)*100, saturation: 24.7, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (120/360)*100, saturation: 39.5, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (300/360)*100, saturation: 100, switch: "on"])
                 }
             }
@@ -131,10 +135,9 @@ void sunsetHandler(evt) {
         } else if (todayDate.format("MM-dd",TimeZone.getTimeZone('US/Eastern')) == "04-16") {				//Cory's Birthday
             for (light in settings.lights) {
                 light.on()
-                if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
+                if (light.displayName ==~ /^.*\bGardenspots\b.*$/ || light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
                     light.setColor([hue: 8, saturation: 82, switch: "on"])
-                }
-                else if ("Color Temperature" in light.capabilities?.name) {
+                } else if ("Color Temperature" in light.capabilities?.name) {
                     light.setColorTemperature(2700)
                 }
             }
@@ -151,8 +154,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (222/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (222/360)*100, saturation: 100, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (0/360)*100, saturation: 0, switch: "on"])
                 }
             }
@@ -168,29 +172,13 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (350/360)*100, saturation: 24.7, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (350/360)*100, saturation: 24.7, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (350/360)*100, saturation: 24.7, switch: "on"])
                 }
             }
             def message = "Happy Mother's Day!"
-            // check that contact book is enabled and recipients selected
-            if (location.contactBookEnabled && recipients) {
-                sendNotificationToContacts(message, recipients)
-            } else {
-                sendPush(message)
-            }
-        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-05-08") {		//FATHER'S DAY
-            for (light in settings.lights) {
-                light.on()
-                if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
-                    light.setColor([hue: (240/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
-                    light.setColor([hue: (240/360)*100, saturation: 100, switch: "on"])
-                }
-            }
-            def message = "Happy Father's Day!"
             // check that contact book is enabled and recipients selected
             if (location.contactBookEnabled && recipients) {
                 sendNotificationToContacts(message, recipients)
@@ -203,8 +191,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (0/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (0/360)*100, saturation: 0, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (240/360)*100, saturation: 100, switch: "on"])
                 }
             }
@@ -218,14 +207,31 @@ void sunsetHandler(evt) {
         } else if (todayDate.format("MM-dd",TimeZone.getTimeZone('US/Eastern')) == "06-16") {				//Clayton's Birthday
             for (light in settings.lights) {
                 light.on()
-                if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
+                if (light.displayName ==~ /^.*\bGardenspots\b.*$/ || light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
                     light.setColor([hue: 8, saturation: 82, switch: "on"])
-                }
-                else if ("Color Temperature" in light.capabilities?.name) {
+                } else if ("Color Temperature" in light.capabilities?.name) {
                     light.setColorTemperature(2700)
                 }
             }
             def message = "Happy Birthday, Clayton!"
+            // check that contact book is enabled and recipients selected
+            if (location.contactBookEnabled && recipients) {
+                sendNotificationToContacts(message, recipients)
+            } else {
+                sendPush(message)
+            }
+        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-06-19") {		//FATHER'S DAY
+            for (light in settings.lights) {
+                light.on()
+                if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
+                    light.setColor([hue: (240/360)*100, saturation: 100, switch: "on"])
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (240/360)*100, saturation: 100, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
+                    light.setColor([hue: (240/360)*100, saturation: 100, switch: "on"])
+                }
+            }
+            def message = "Happy Father's Day!"
             // check that contact book is enabled and recipients selected
             if (location.contactBookEnabled && recipients) {
                 sendNotificationToContacts(message, recipients)
@@ -237,8 +243,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (0/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (0/360)*100, saturation: 0, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (240/360)*100, saturation: 100, switch: "on"])
                 }
             }
@@ -255,8 +262,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (222/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (222/360)*100, saturation: 100, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (0/360)*100, saturation: 0, switch: "on"])
                 }
             }
@@ -272,8 +280,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (222/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (222/360)*100, saturation: 100, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (0/360)*100, saturation: 0, switch: "on"])
                 }
             }
@@ -289,8 +298,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (30/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (30/360)*100, saturation: 100, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (300/360)*100, saturation: 100, switch: "on"])
                 }
             }
@@ -306,8 +316,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (0/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (0/360)*100, saturation: 0, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (240/360)*100, saturation: 100, switch: "on"])
                 }
             }
@@ -324,9 +335,10 @@ void sunsetHandler(evt) {
             for (light in settings.lights) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
+                    light.setColor([hue: (0/360)*100, saturation: 75, switch: "on"])
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
                     light.setColor([hue: (0/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (30/360)*100, saturation: 100, switch: "on"])
                 }
             }
@@ -343,8 +355,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (0/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (0/360)*100, saturation: 100, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (120/360)*100, saturation: 100, switch: "on"])
                 }
             }
@@ -360,8 +373,9 @@ void sunsetHandler(evt) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
                     light.setColor([hue: (222/360)*100, saturation: 100, switch: "on"])
-                }
-                else if ("Color Control" in light.capabilities?.name) {
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (222/360)*100, saturation: 100, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
                     light.setColor([hue: (0/360)*100, saturation: 0, switch: "on"])
                 }
             }
@@ -375,10 +389,9 @@ void sunsetHandler(evt) {
         } else {
             for (light in settings.lights) {
                 light.on()
-                if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
+                if (light.displayName ==~ /^.*\bGardenspots\b.*$/ || light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
                     light.setColor([hue: 8, saturation: 82, switch: "on"])
-                }
-                else if ("Color Temperature" in light.capabilities?.name) {
+                } else if ("Color Temperature" in light.capabilities?.name) {
                     light.setColorTemperature(2700)
                 }
             }
