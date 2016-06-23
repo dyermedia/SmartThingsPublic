@@ -77,7 +77,7 @@ void routineHandler(evt) {
         settings.nightSwitchesOffPriority?.off()
         settings.locks?.lock()
         for (nightSpeaker in settings.nightSpeakers) {
-        	nightSpeaker.setLevel(25)
+        	nightSpeaker.setLevel(35)
             nightSpeaker.playTrack("x-sonos-http:_dklxfo-EJNJKoALaiAtew-f3KyIIxOWghQI1f3-2kARNmcZh6sH_MBk0MiQSSNT0tWVdFvBGZU.mp3?sid=151&flags=8192&sn=1")
         }
         settings.thermostats?.setThermostatProgram("sleep", "nextTransition")
