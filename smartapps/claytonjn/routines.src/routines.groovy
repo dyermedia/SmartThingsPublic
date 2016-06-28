@@ -36,6 +36,7 @@ preferences {
             input "nightSpeakers", "capability.musicPlayer", title: "Speaker(s) to play lullaby", multiple: true, required: false
             input "nightSwitchesOffPriority", "capability.switch", title: "Switch(s) to prioritize turning off when Night", multiple: true, required: false
             input "nightSwitchesOff", "capability.switch", title: "Switch(s) to turn off when Night", multiple: true, required: false
+            input "ceilingFans", "capability.switch", title: "Fans(s) to control", multiple: true, required: false
         }
     }
 }
@@ -64,12 +65,15 @@ void routineHandler(evt) {
         settings.homeSwitches?.off()
         setLocationMode("Home")
         settings.thermostats?.setThermostatProgram("home", "indefinite")
+        settings.ceilingFans?.setSleepOff()
     } else if (evt.displayName == "Away" || evt.value == "away") {
     	sendLocationEvent(name: "alarmSystemStatus", value: "away")
         settings.locks?.lock()
         setLocationMode("Away")
         settings.thermostats?.setThermostatProgram("away", "nextTransition")
         settings.awaySwitches?.off()
+        settings.ceilingFans?.off()
+        settings.ceilingFans?.lightOff()
     } else if (evt.displayName == "Night") {
     	sendLocationEvent(name: "alarmSystemStatus", value: "stay")
         setLocationMode("Night")
@@ -81,6 +85,7 @@ void routineHandler(evt) {
             nightSpeaker.playTrack("x-sonos-http:_dklxfo-EJNJKoALaiAtew-f3KyIIxOWghQI1f3-2kARNmcZh6sH_MBk0MiQSSNT0tWVdFvBGZU.mp3?sid=151&flags=8192&sn=1")
         }
         settings.thermostats?.setThermostatProgram("sleep", "nextTransition")
+        settings.ceilingFans?.setSleepOn()
         settings.nightSwitchesOff?.off()
     }
 }
