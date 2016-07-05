@@ -72,8 +72,6 @@ void routineHandler(evt) {
         setLocationMode("Away")
         settings.thermostats?.setThermostatProgram("away", "nextTransition")
         settings.awaySwitches?.off()
-        settings.ceilingFans?.off()
-        settings.ceilingFans?.lightOff()
     } else if (evt.displayName == "Night") {
     	sendLocationEvent(name: "alarmSystemStatus", value: "stay")
         setLocationMode("Night")
