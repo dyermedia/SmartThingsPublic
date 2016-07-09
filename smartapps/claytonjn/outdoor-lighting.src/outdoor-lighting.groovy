@@ -256,6 +256,24 @@ void sunsetHandler(evt) {
             } else {
                 sendPush(message)
             }
+        } else if (todayDate.format("MM-dd",TimeZone.getTimeZone('US/Eastern')) == "07-08") {				//ELIZABETH LAKE FIREWORKS
+            for (light in settings.lights) {
+                light.on()
+                if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
+                    light.setColor([hue: (0/360)*100, saturation: 100, switch: "on"])
+                } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
+                    light.setColor([hue: (0/360)*100, saturation: 0, switch: "on"])
+                } else if ("Color Control" in light.capabilities?.name) {
+                    light.setColor([hue: (240/360)*100, saturation: 100, switch: "on"])
+                }
+            }
+            def message = "Happy Fireworks!"
+            // check that contact book is enabled and recipients selected
+            if (location.contactBookEnabled && recipients) {
+                sendNotificationToContacts(message, recipients)
+            } else {
+                sendPush(message)
+            }
         } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-10-02"
         			|| todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-10-03") {	//ROSH HASHANAH
             for (light in settings.lights) {
