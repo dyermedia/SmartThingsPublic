@@ -1,5 +1,5 @@
 /**
- *  Kitchen Utility Lighting
+ *  Utility Lighting
  *
  *  Copyright 2016 Clayton Nummer
  *
@@ -14,10 +14,10 @@
  *
  */
 definition(
-    name: "Kitchen Utility Lighting",
+    name: "Utility Lighting",
     namespace: "claytonjn",
     author: "claytonjn",
-    description: "Turns on the \"utility\" lights in the kitchen when there's motion.",
+    description: "Turns on \"utility\" lights when there's motion.",
     category: "My Apps",
     iconUrl: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn.png",
     iconX2Url: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn@2x.png",
@@ -27,9 +27,10 @@ definition(
 preferences {
 	page(name: "page", install: true, uninstall: true) {
         section("Title") {
-        	paragraph "Turns on the \"utility\" lights in the kitchen when there's motion."
+        	paragraph "Turns on \"utility\" lights when there's motion."
             input "lights", "capability.switch", title: "\"Utility\" Light(s)", multiple: true
             input "motions", "capability.motionSensor", title: "Motion(s)", multiple: true
+            input "minutes", "number", title: "Minutes without motion before turning off light(s)"
         }
     }
 }
@@ -57,7 +58,7 @@ void motionHandler(evt) {
             unschedule(lightsOff)
             settings.lights?.on()
         } else if (evt.value == "inactive") {
-            runIn(60*2, lightsOff)
+            runIn(60*settings.minutes, lightsOff)
         }
     }
 }
