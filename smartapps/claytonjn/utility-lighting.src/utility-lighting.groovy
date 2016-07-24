@@ -31,6 +31,7 @@ preferences {
             input "lights", "capability.switch", title: "\"Utility\" Light(s)", multiple: true
             input "motions", "capability.motionSensor", title: "Motion(s)", multiple: true
             input "minutes", "number", title: "Minutes without motion before turning off light(s)"
+            label title: "Assign a name", required: false
         }
     }
 }
