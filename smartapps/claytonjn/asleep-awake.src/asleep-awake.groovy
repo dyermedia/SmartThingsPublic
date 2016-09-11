@@ -33,6 +33,7 @@ preferences {
             input "claytonSleep", "capability.switch", title: "Clayton - Sleep", multiple: false
             input "corySleep", "capability.switch", title: "Cory - Sleep", multiple: false
             input "sleep", "capability.switch", title: "Sleep Switch", multiple: false
+            input "ceilingFans", "capability.switch", title: "Fans(s) to control", multiple: true, required: false
         }
     }
 }
@@ -63,16 +64,19 @@ void wakeHandler(evt) {
         if (clayton.currentValue("presence") == "present" && cory.currentValue("presence") == "present") {
             if (claytonSleep.currentValue("switch") == "off" && corySleep.currentValue("switch") == "off") {
                 settings.sleep.off()
+                settings.ceilingFans?.setSleepOff()
             }
         }
         else if (clayton.currentValue("presence") == "present" && cory.currentValue("presence") == "not present") {
             if (claytonSleep.currentValue("switch") == "off") {
                 settings.sleep.off()
+                settings.ceilingFans?.setSleepOff()
             }
         }
         else if (clayton.currentValue("presence") == "not present" && cory.currentValue("presence") == "present") {
             if (corySleep.currentValue("switch") == "off") {
                 settings.sleep.off()
+                settings.ceilingFans?.setSleepOff()
             }
         }
     }

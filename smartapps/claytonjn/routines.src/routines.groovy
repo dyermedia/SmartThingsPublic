@@ -65,7 +65,6 @@ void routineHandler(evt) {
         settings.homeSwitches?.off()
         setLocationMode("Home")
         settings.thermostats?.setThermostatProgram("home", "indefinite")
-        settings.ceilingFans?.setSleepOff()
     } else if (evt.displayName == "Away" || evt.value == "away") {
     	sendLocationEvent(name: "alarmSystemStatus", value: "away")
         settings.locks?.lock()
