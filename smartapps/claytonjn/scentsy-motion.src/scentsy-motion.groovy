@@ -21,6 +21,7 @@ preferences {
             paragraph "Turn on Scentsy(s) when there's motion."
             input "scentsys", "capability.switch", title: "Scentsy(s)", multiple: true
             input "motions", "capability.motionSensor", title: "Motion Sensor(s)", multiple: true
+            input "minutes", "number", title: "Minutes without motion before turning off Scentsy(s)"
             label title: "Assign a name", required: false
         }
     }
@@ -49,7 +50,7 @@ void motionHandler(evt) {
             unschedule(scentsysOff)
             settings.scentsys?.on()
         } else if (evt.value == "inactive") {
-            runIn(60*15, scentsysOff)
+            runIn(60*settings.minutes, scentsysOff)
         }
     }
 }
