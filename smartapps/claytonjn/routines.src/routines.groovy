@@ -31,7 +31,8 @@ preferences {
             input "thermostats", "capability.thermostat", title: "Thermostat(s)", multiple: true, required: false
             input "locks", "capability.lock", title: "Lock(s)", multiple: true, required: false
             input "awaySwitches", "capability.switch", title: "Switch(s) to turn off when Away", multiple: true, required: false
-            input "homeSwitches", "capability.switch", title: "Switch(s) to turn off when Home", multiple: true, required: false
+            input "homeSwitchesOn", "capability.switch", title: "Switch(s) to turn on when Home", multiple: true, required: false
+            input "homeSwitchesOff", "capability.switch", title: "Switch(s) to turn off when Home", multiple: true, required: false
             input "nightSwitchesOn", "capability.switch", title: "Switch(s) to turn on when Night", multiple: true, required: false
             input "nightSpeakers", "capability.musicPlayer", title: "Speaker(s) to play lullaby", multiple: true, required: false
             input "nightSwitchesOffPriority", "capability.switch", title: "Switch(s) to prioritize turning off when Night", multiple: true, required: false
@@ -62,7 +63,8 @@ def initialize() {
 void routineHandler(evt) {
 	if (evt.displayName == "Home" || evt.value == "off") {
     	sendLocationEvent(name: "alarmSystemStatus", value: "off")
-        settings.homeSwitches?.off()
+        settings.homeSwitchesOn?.on()
+        settings.homeSwitchesOff?.off()
         setLocationMode("Home")
         settings.thermostats?.setThermostatProgram("home", "indefinite")
     } else if (evt.displayName == "Away" || evt.value == "away") {
