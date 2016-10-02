@@ -66,12 +66,12 @@ void routineHandler(evt) {
         settings.homeSwitchesOn?.on()
         settings.homeSwitchesOff?.off()
         setLocationMode("Home")
-        settings.thermostats?.setThermostatProgram("home", "indefinite")
+        settings.thermostats?.setThermostatProgram("Home", "indefinite")
     } else if (evt.displayName == "Away" || evt.value == "away") {
     	sendLocationEvent(name: "alarmSystemStatus", value: "away")
         settings.locks?.lock()
         setLocationMode("Away")
-        settings.thermostats?.setThermostatProgram("away", "nextTransition")
+        settings.thermostats?.setThermostatProgram("Away", "nextTransition")
         settings.awaySwitches?.off()
     } else if (evt.displayName == "Night") {
     	sendLocationEvent(name: "alarmSystemStatus", value: "stay")
@@ -83,7 +83,7 @@ void routineHandler(evt) {
         	nightSpeaker.setLevel(35)
             nightSpeaker.playTrack("x-sonos-http:_dklxfo-EJNJKoALaiAtew-f3KyIIxOWghQI1f3-2kARNmcZh6sH_MBk0MiQSSNT0tWVdFvBGZU.mp3?sid=151&flags=8192&sn=1")
         }
-        settings.thermostats?.setThermostatProgram("sleep", "nextTransition")
+        settings.thermostats?.setThermostatProgram("Sleep", "nextTransition")
         settings.ceilingFans?.setSleepOn()
         settings.nightSwitchesOff?.off()
     }
