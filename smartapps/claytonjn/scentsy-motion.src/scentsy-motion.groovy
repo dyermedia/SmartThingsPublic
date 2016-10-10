@@ -22,6 +22,7 @@ preferences {
             input "scentsys", "capability.switch", title: "Scentsy(s)", multiple: true
             input "motions", "capability.motionSensor", title: "Motion Sensor(s)", multiple: true
             input "minutes", "number", title: "Minutes without motion before turning off Scentsy(s)"
+            mode(title: "Set for specific mode(s)")
             label title: "Assign a name", required: false
         }
     }
