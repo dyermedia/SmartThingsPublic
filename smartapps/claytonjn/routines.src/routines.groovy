@@ -66,12 +66,10 @@ void routineHandler(evt) {
         settings.homeSwitchesOn?.on()
         settings.homeSwitchesOff?.off()
         setLocationMode("Home")
-        settings.thermostats?.setThermostatProgram("Home", "indefinite")
     } else if (evt.displayName == "Away" || evt.value == "away") {
     	sendLocationEvent(name: "alarmSystemStatus", value: "away")
         settings.locks?.lock()
         setLocationMode("Away")
-        settings.thermostats?.setThermostatProgram("Away", "nextTransition")
         settings.awaySwitches?.off()
     } else if (evt.displayName == "Night") {
     	sendLocationEvent(name: "alarmSystemStatus", value: "stay")
