@@ -28,7 +28,7 @@ preferences {
 	page(name: "page", install: true, uninstall: true) {
         section("Preferences") {
             paragraph "Turn on/off bias lighting with Harmony activities"
-            input "activities", "capability.switch", title: "Harmony Activity(s)", multiple: true, required: true
+            input "activities", "device.harmonyActivity", title: "Harmony Activity(s)", multiple: true, required: true
             input "lights", "capability.switch", title: "Bias Lights(s)", multiple: true, required: true
             label title: "Assign a name", required: false
         }
