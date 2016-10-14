@@ -30,6 +30,7 @@ preferences {
             paragraph "Sync physical dimmer switch and bulbs"
             input "physical", "capability.switch", title: "Physical Switch", multiple: false, required: true
             input "lights", "capability.switch", title: "Light(s)", multiple: true, required: true
+            mode(title: "Set for specific mode(s)")
             label title: "Assign a name", required: false
         }
     }
