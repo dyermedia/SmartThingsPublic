@@ -17,7 +17,7 @@ definition(
     name: "Garage Door Notification",
     namespace: "claytonjn",
     author: "claytonjn",
-    description: "Send a notification when the garage door is opened and we aren&#39;t home",
+    description: "Send a notification when the garage door is opened and we aren't home",
     category: "My Apps",
     iconUrl: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn.png",
     iconX2Url: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn@2x.png",
@@ -27,7 +27,7 @@ definition(
 preferences {
     page(name: "page", install: true, uninstall: true) {
         section("Preferences") {
-            paragraph "Send a notification when the garage door is opened and we aren&#39;t home"
+            paragraph "Send a notification when the garage door is opened and we aren't home"
             input "garageDoors", "device.myQGarageDoorOpener", title: "Garage Door(s)", multiple: true, required: true
             input "clayton", "capability.presenceSensor", title: "Clayton - Presence", multiple: false
             input "cory", "capability.presenceSensor", title: "Cory - Presence", multiple: false
