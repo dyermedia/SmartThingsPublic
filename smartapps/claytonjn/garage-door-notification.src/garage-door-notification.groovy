@@ -28,10 +28,9 @@ preferences {
     page(name: "page", install: true, uninstall: true) {
         section("Preferences") {
             paragraph "Send a notification when the garage door is opened and we aren't home"
-            input "garageDoors", "device.myQGarageDoorOpener", title: "Garage Door(s)", multiple: true, required: true
-            input "clayton", "capability.presenceSensor", title: "Clayton - Presence", multiple: false
-            input "cory", "capability.presenceSensor", title: "Cory - Presence", multiple: false
-            input("recipients", "contact", title: "Send notifications to", multiple: true, required: false)
+            input "garageDoors", "device.myqGarageDoorOpener", title: "Garage Door(s)", multiple: true, required: true
+            input("recipients", "contact", title: "Send notifications to", multiple: true, required: true)
+            input "presence", "capability.presenceSensor", title: "Don't send notification if any of these people are home", multiple: true, required: false
         }
     }
 }
@@ -54,7 +53,7 @@ def initialize() {
 }
 
 def notificationHandler(evt) {
-    if (settings.clayton.currentValue("presence") == "not present" && settings.cory.currentValue("presence") == "not present") {
+	if (!settings.presence?.currentValue("presence").contains("present")) {
         // check that contact book is enabled and recipients selected
         if (location.contactBookEnabled && settings.recipients) {
             sendNotificationToContacts("${evt.displayName} opened!", settings.recipients)
