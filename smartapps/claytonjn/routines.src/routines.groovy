@@ -29,7 +29,8 @@ preferences {
         section("Title") {
             paragraph "Runs when a Routine is triggered."
             input "thermostats", "capability.thermostat", title: "Thermostat(s)", multiple: true, required: false
-            input "locks", "capability.lock", title: "Lock(s)", multiple: true, required: false
+            input "locks", "capability.lock", title: "Door Lock(s)", multiple: true, required: false
+            input "garageDoors", "capability.switch", title: "Garage Door(s)", multiple: true, required: false
             input "awaySwitches", "capability.switch", title: "Switch(s) to turn off when Away", multiple: true, required: false
             input "homeSwitchesOn", "capability.switch", title: "Switch(s) to turn on when Home", multiple: true, required: false
             input "homeSwitchesOff", "capability.switch", title: "Switch(s) to turn off when Home", multiple: true, required: false
@@ -68,6 +69,7 @@ void routineHandler(evt) {
         setLocationMode("Home")
     } else if (evt.displayName == "Away" || evt.value == "away") {
     	sendLocationEvent(name: "alarmSystemStatus", value: "away")
+        settings.garageDoors?.close()
         settings.locks?.lock()
         setLocationMode("Away")
         settings.awaySwitches?.off()
@@ -76,6 +78,7 @@ void routineHandler(evt) {
         setLocationMode("Night")
         settings.nightSwitchesOn?.on()
         settings.nightSwitchesOffPriority?.off()
+        settings.garageDoors?.close()
         settings.locks?.lock()
         for (nightSpeaker in settings.nightSpeakers) {
         	nightSpeaker.setLevel(35)

@@ -31,6 +31,7 @@ preferences {
             input "coDetectors", "capability.carbonMonoxideDetector", title: "CO Detector(s)", multiple: true, required: false
             input "coAlert", "capability.switch", title: "CO Alert", multiple: false, required: false
             input "locks", "capability.lock", title: "Door Lock(s)", multiple: true, required: false
+            input "garageDoors", "capability.switch", title: "Garage Door(s)", multiple: true, required: false
             input "thermostats", "capability.thermostat", title: "Thermostat(s)", multiple: true, required: false
             input "switches", "capability.switch", title: "Light(s)", multiple: true, required: false
             input("recipients", "contact", title: "Send notifications to", multiple: true, required: false)
@@ -67,7 +68,7 @@ void coHandler(evt) {
 
 void evtHandler(type, evt) {
 	settings.thermostats?.off()
-    
+
     // check that contact book is enabled and recipients selected
     if (location.contactBookEnabled && settings.recipients) {
         sendNotificationToContacts("${type} detected at ${evt.displayName}!", settings.recipients)
@@ -76,11 +77,12 @@ void evtHandler(type, evt) {
         def phones = ["3134057084", "3135493545", "2484108350", "2482078762", "3134029668", "3134029660"]
         for (phone in phones) { sendSmsMessage(phone, "${type} detected at ${evt.displayName}!") }
     }
-    
+
     settings.locks?.unlock()
-    
+    settings.garageDoors?.open()
+
     if (type == "Carbon Monoxide") {
-    	for (light in settings.switches) { 
+    	for (light in settings.switches) {
             light.on()
             if ("Switch Level" in light.capabilities?.name) { light.setLevel(100) }
             if ("Color Control" in light.capabilities?.name) { light.setColor([hex: "#FF0000", level: 100, switch: "on"]) }
