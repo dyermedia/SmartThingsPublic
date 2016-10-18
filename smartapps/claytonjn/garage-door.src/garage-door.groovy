@@ -14,10 +14,10 @@
  *
  */
 definition(
-    name: "Garage Door Notification",
+    name: "Garage Door",
     namespace: "claytonjn",
     author: "claytonjn",
-    description: "Send a notification when the garage door is opened and we aren't home",
+    description: "Ensures the Garage Door is closed when we leave, and sends a notification when the garage door is opened and we aren't home",
     category: "My Apps",
     iconUrl: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn.png",
     iconX2Url: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn@2x.png",
@@ -27,10 +27,10 @@ definition(
 preferences {
     page(name: "page", install: true, uninstall: true) {
         section("Preferences") {
-            paragraph "Send a notification when the garage door is opened and we aren't home"
+            paragraph "Ensures the Garage Door is closed when we leave, and sends a notification when the garage door is opened and we aren't home"
             input "garageDoors", "device.myqGarageDoorOpener", title: "Garage Door(s)", multiple: true, required: true
+            input "presence", "capability.presenceSensor", title: "Presence(s)", multiple: true, required: false
             input("recipients", "contact", title: "Send notifications to", multiple: true, required: true)
-            input "presence", "capability.presenceSensor", title: "Don't send notification if any of these people are home", multiple: true, required: false
         }
     }
 }
@@ -49,7 +49,14 @@ def updated() {
 }
 
 def initialize() {
-	subscribe(settings.garageDoors, "door.open", notificationHandler)
+    subscribe(settings.presence, "presence", awayHandler)
+    subscribe(settings.garageDoors, "door.open", notificationHandler)
+}
+
+def awayHandler(evt) {
+    if (!settings.presence?.currentValue("presence").contains("present")) {
+        settings.garageDoors?.close()
+    }
 }
 
 def notificationHandler(evt) {
