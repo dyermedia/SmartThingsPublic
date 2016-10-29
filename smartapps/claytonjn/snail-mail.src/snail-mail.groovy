@@ -17,7 +17,7 @@ definition(
     name: "Snail Mail",
     namespace: "claytonjn",
     author: "claytonjn",
-    description: "Sends alerts based on Mailbox door sensor.",
+    description: "Sends alerts based on Mailbox sensor.",
     category: "My Apps",
     iconUrl: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn.png",
     iconX2Url: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/claytonjn-personal/icons/claytonjn@2x.png",
@@ -27,8 +27,8 @@ definition(
 preferences {
 	page(name: "page", install: true, uninstall: true) {
         section("Preferences") {
-            paragraph "Sends alerts based on Mailbox door sensor."
-            input "mailboxes", "capability.contactSensor", title: "Mailbox(s)", multiple: true
+            paragraph "Sends alerts based on Mailbox sensor."
+            input "mailboxes", "capability.motionSensor", title: "Mailbox(s)", multiple: true
             input "mail", "capability.switch", title: "Mail Switch", multiple: false
             input "presences", "capability.presenceSensor", title: "Presence(s)", multiple: true
             input("recipients", "contact", title: "Send notifications to", multiple: true)
@@ -50,7 +50,7 @@ def updated() {
 }
 
 def initialize() {
-	subscribe(settings.mailboxes, "contact.open", mailboxHandler)
+	subscribe(settings.mailboxes, "motion.active", mailboxHandler)
     subscribe(settings.mail, "switch", mailHandler)
 }
 
