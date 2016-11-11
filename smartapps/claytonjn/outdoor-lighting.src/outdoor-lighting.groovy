@@ -332,12 +332,14 @@ void sunsetHandler(evt) {
         } else if (todayDate.format("MM-dd",TimeZone.getTimeZone('US/Eastern')) == "11-11") {				//Veterans Day
             for (light in settings.lights) {
                 light.on()
-                if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
+                if (light.displayName ==~ /^.*\bEast Gardenspots\b.*$/) {
                     light.setColor([hue: (0/360)*100, saturation: 100, switch: "on"])
+                } else if (light.displayName ==~ /^.*\bWest Gardenspots\b.*$/) {
+                    light.setColor([hue: (240/360)*100, saturation: 100, switch: "on"])
                 } else if (light.displayName ==~ /^.*\bPorch\b.*\bStep\b.*$/) {
                     light.setColor([hue: (0/360)*100, saturation: 0, switch: "on"])
                 } else if ("Color Control" in light.capabilities?.name) {
-                    light.setColor([hue: (240/360)*100, saturation: 100, switch: "on"])
+                    light.setColor([hue: (120/360)*100, saturation: 100, switch: "on"])
                 }
             }
             def message = "Happy Veterans Day!"
