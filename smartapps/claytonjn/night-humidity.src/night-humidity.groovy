@@ -40,27 +40,19 @@ def updated() {
 }
 
 def initialize() {
-	subscribe(settings.humiditys, "humidity", humidityHandler)
-    subscribe(location, "mode", modeHandler)
+	subscribe(settings.humiditys, "humidity", evtHandler)
+    subscribe(location, "mode", evtHandler)
 }
 
-void humidityHandler(evt) {
-    if (Double.parseDouble(evt.value) < 50) {
-        if (location.mode in ["Night"]) {
-        	settings.humidifiers?.on()
-    	}
-    }
-    else {
-        settings.humidifiers?.off()
-    }
-}
-
-void modeHandler(evt) {
-    if (evt.value in ["Night"]) {
-    	for (humidity in settings.humiditys) {
-        	if (humidity.currentValue("humidity") < 50) {
-            	settings.humidifiers?.on()
-            }
+void evtHandler(evt) {
+    if (location.mode in ["Night"]) {
+        def avgHumidity = 0
+        for (humidity in settings.humiditys) {
+            avgHumidity += humidity.currentValue("humidity")
+        }
+        avgHumidity = avgHumidity / settings.humiditys.size()
+        if (avgHumidity < 50) {
+            settings.humidifiers?.on()
         }
     }
     else {
