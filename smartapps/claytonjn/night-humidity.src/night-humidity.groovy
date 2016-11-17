@@ -53,6 +53,8 @@ void evtHandler(evt) {
         avgHumidity = avgHumidity / settings.humiditys.size()
         if (avgHumidity < 50) {
             settings.humidifiers?.on()
+        } else {
+            settings.humidifiers?.off()
         }
     }
     else {
