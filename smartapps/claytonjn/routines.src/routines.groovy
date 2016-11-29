@@ -84,7 +84,7 @@ void routineHandler(evt) {
         settings.locks?.lock()
         for (nightSpeaker in settings.nightSpeakers) {
         	nightSpeaker.setLevel(35)
-            nightSpeaker.playTrack("x-sonos-http:_dklxfo-EJNJKoALaiAtew-f3KyIIxOWghQI1f3-2kARNmcZh6sH_MBk0MiQSSNT0tWVdFvBGZU.mp3?sid=151&flags=8192&sn=1")
+            nightSpeaker.playTrack("https://s3.amazonaws.com/elasticbeanstalk-us-east-1-773363323461/GreenNoiseTenHours.mp3")
         }
         settings.thermostats?.setThermostatProgram("Sleep", "nextTransition")
         settings.ceilingFans?.setSleepOn()
