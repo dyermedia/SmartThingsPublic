@@ -159,6 +159,7 @@ private def sendCommand(command) {
     command = "<${settings.mac};${command}>"
     log.debug "Sending command ${command}"
     return new physicalgraph.device.HubAction(command,physicalgraph.device.Protocol.LAN)
+	device.deviceNetworkId = ipToHex(settings.ip) + ":" + portToHex(31415) + "-light"
 }
 
 private def ipToHex(ip) {
