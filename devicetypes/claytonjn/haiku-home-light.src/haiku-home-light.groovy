@@ -14,7 +14,7 @@
  *
  */
 metadata {
-	definition (name: "Haiku Home Fan", namespace: "claytonjn", author: "claytonjn") {
+	definition (name: "Haiku Home Light", namespace: "claytonjn", author: "claytonjn") {
 		capability "Switch"
 		capability "Switch Level"
 
