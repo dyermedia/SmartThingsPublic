@@ -18,9 +18,6 @@ metadata {
 		capability "Switch"
 		capability "Switch Level"
 
-		command "lightOn"
-		command "lightOff"
-		command "lightSetLevel"
 		command "setSmartModeOff"
 		command "setSmartModeFollowTStat"
 		command "setSmartModeCooling"
@@ -30,27 +27,21 @@ metadata {
 		command "setSmartMax"
 		command "setMotionFanOn"
 		command "setMotionFanOff"
-		command "setMotionLightOn"
-		command "setMotionLightOff"
 		command "setMotionTimeout"
 		command "setSleepOn"
 		command "setSleepOff"
 		command "setSleepTemp"
 		command "setSleepMin"
 		command "setSleepMax"
-		//command "setSleepWakeLightLevel"
-		//command "setSleepWakeLightOff"
 		command "setWhooshOn"
 		command "setWhooshOff"
 
-		attribute "lightLevel", "NUMBER"
 		attribute "smartTemp", "NUMBER"
 		attribute "smartMin", "NUMBER"
 		attribute "smartMax", "NUMBER"
 		attribute "sleepTemp", "NUMBER"
 		attribute "sleepMin", "NUMBER"
 		attribute "sleepMax", "NUMBER"
-		//attribute "sleepWakeLight", "STRING"
 	}
 
 
@@ -67,16 +58,6 @@ metadata {
         }
         standardTile("fanOn", "device.switch", width: 1, height: 1, decoration: "flat") {
             state "default", label: 'On', action: "switch.on", icon: "st.Lighting.light24", decoration: flat
-        }
-
-		standardTile("lightOff", "device.lightSwitch", width: 1, height: 1, decoration: "flat") {
-            state "default", label: 'Off', action: "lightOff", icon: "st.Lighting.light21", decoration: flat
-        }
-        controlTile("lightLevel", "device.lightLevel", "slider", width: 4, height: 1, decoration: "flat") {
-            state "lightLevel", action: "lightSetLevel"
-        }
-        standardTile("lightOn", "device.lightSwitch", width: 1, height: 1, decoration: "flat") {
-            state "default", label: 'On', action: "lightOn", icon: "st.Lighting.light21", decoration: flat
         }
 
 		valueTile("modeOff", "device.mode", width: 2, height: 1, decoration: "flat") {
@@ -110,13 +91,6 @@ metadata {
 			state "default", label: "Motion Fan Off", action: "setMotionFanOff"
 		}
 
-		valueTile("motionLightOn", "device.motionLight", width: 2, height: 1, decoration: "flat") {
-			state "default", label: "Motion Light On", action: "setMotionLightOn"
-		}
-		valueTile("motionLightOff", "device.motionLight", width: 2, height: 1, decoration: "flat") {
-			state "default", label: "Motion Light Off", action: "setMotionLightOff"
-		}
-
 		valueTile("sleepOn", "device.sleep", width: 2, height: 1, decoration: "flat") {
 			state "default", label: "Sleep On", action: "setSleepOn"
 		}
@@ -132,14 +106,6 @@ metadata {
 		controlTile("sleepMax", "device.sleepMax", "slider", width: 4, height: 1, decoration: "flat", range: "(0..7)") {
             state "sleepMax", action: "setSleepMax"
         }
-		/*
-		controlTile("setSleepWakeLightLevel", "device.sleepWakeLight", "slider", width: 4, height: 1, decoration: "flat", range: "(1..16)") {
-            state "sleepWakeLight", action: "setSleepWakeLightLevel"
-        }
-		valueTile("setSleepWakeLightOff", "device.sleepWakeLight", width: 2, height: 1, decoration: "flat") {
-			state "default", label: "Wake Light Off", action: "setSleepWakeLightOff"
-		}
-		*/
 
 		valueTile("whooshOn", "device.whoosh", width: 2, height: 1, decoration: "flat") {
 			state "default", label: "Whoosh On", action: "setWhooshOn"
@@ -180,32 +146,6 @@ def setLevel(level) {
 	log.debug "Executing 'setLevel' for fan"
 	sendEvent(name: "level", value: level, descriptionText: "Fan speed has been set to level ${level}", isStateChange: true)
 	sendCommand("FAN;SPD;SET;${level}")
-}
-
-def lightOn() {
-	log.debug "Executing 'on' for light"
-	sendEvent(name: "lightSwitch", value: "on", descriptionText: "Light has been turned on", isStateChange: true)
-	sendCommand("LIGHT;PWR;ON")
-}
-
-def lightOff() {
-	log.debug "Executing 'off' for light"
-	sendEvent(name: "lightSwitch", value: "off", descriptionText: "Light has been turned off", isStateChange: true)
-	sendCommand("LIGHT;PWR;OFF")
-}
-
-def lightSetLevel(percent) {
-	log.debug "Executing 'setLevel' for light"
-	if (percent == 0) {
-		lightOff()
-	} else {
-		def stRange = (100 - 1)
-		def haikuRange = (16 - 1)
-		def haikuValue = (((percent - 1) * haikuRange) / stRange) + 1
-		haikuValue = Math.round(haikuValue) as Integer
-		sendEvent(name: "lightLevel", value: percent, descriptionText: "Light level has changed to ${percent}%", isStateChange: true)
-		sendCommand("LIGHT;LEVEL;SET;${haikuValue}")
-	}
 }
 
 def setSmartMode(mode) {
@@ -262,18 +202,6 @@ def setMotionFanOff() {
 	sendCommand("FAN;AUTO;OFF")
 }
 
-def setMotionLightOn() {
-	log.debug "Executing 'setMotionLightOn'"
-	sendEvent(name: "motionLight", value: "ON", isStateChange: true)
-	sendCommand("LIGHT;AUTO;ON")
-}
-
-def setMotionLightOff() {
-	log.debug "Executing 'setMotionLightOff'"
-	sendEvent(name: "motionLight", value: "OFF", isStateChange: true)
-	sendCommand("LIGHT;AUTO;OFF")
-}
-
 def setMotionTimeout(minutes) {
 	log.debug "Executing 'setMotionTimeout:${minutes}'"
 	sendEvent(name: "motionTimeout", value: minutes, isStateChange: true)
@@ -312,20 +240,6 @@ def setSleepMax(level) {
 	sendEvent(name: "sleepMax", value: level, isStateChange: true)
 	sendCommand("SMARTSLEEP;MAXSPEED;SET;${level}")
 }
-
-/*
-def setSleepWakeLightLevel(level) {
-	log.debug "Executing 'setSleepWakeLightLevel:${level}'"
-	sendEvent(name: "sleepWakeLight", value: level, isStateChange: true)
-	sendCommand("SLEEP;EVENT;OFF;LIGHT;LEVEL;${level}")
-}
-
-def setSleepWakeLightOff() {
-	log.debug "Executing 'setSleepWakeLightOff'"
-	sendEvent(name: "sleepWakeLight", value: "OFF", isStateChange: true)
-	sendCommand("SLEEP;EVENT;OFF;LIGHT;PWR;OFF")
-}
-*/
 
 def setWhooshOn() {
 	log.debug "Executing 'setWhooshOn'"
