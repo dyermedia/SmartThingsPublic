@@ -36,6 +36,7 @@ preferences {
             input "homeSwitchesOff", "capability.switch", title: "Switch(s) to turn off when Home", multiple: true, required: false
             input "nightSwitchesOn", "capability.switch", title: "Switch(s) to turn on when Night", multiple: true, required: false
             input "nightSpeakers", "capability.musicPlayer", title: "Speaker(s) to play lullaby", multiple: true, required: false
+            input "nightVolume", "number", title: "Volume to play lullaby", defaultValue: 10, required: false
             input "nightSwitchesOffPriority", "capability.switch", title: "Switch(s) to prioritize turning off when Night", multiple: true, required: false
             input "nightSwitchesOff", "capability.switch", title: "Switch(s) to turn off when Night", multiple: true, required: false
             input "ceilingFans", "capability.switch", title: "Fans(s) to control", multiple: true, required: false
@@ -82,10 +83,7 @@ void routineHandler(evt) {
         settings.nightSwitchesOffPriority?.off()
         settings.garageDoors?.close()
         settings.locks?.lock()
-        for (nightSpeaker in settings.nightSpeakers) {
-        	nightSpeaker.setLevel(35)
-            nightSpeaker.playTrack("https://s3.amazonaws.com/elasticbeanstalk-us-east-1-773363323461/GreenNoiseTenHours.mp3")
-        }
+        settings.nightSpeakers?.playTrackAtVolume("https://s3.amazonaws.com/elasticbeanstalk-us-east-1-773363323461/GreenNoiseTenHours.mp3", settings.nightVolume)
         settings.thermostats?.setThermostatProgram("Sleep", "nextTransition")
         settings.ceilingFans?.setSleepOn()
         settings.nightSwitchesOff?.off()
