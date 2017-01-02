@@ -114,7 +114,7 @@ void sunsetHandler(evt) {
             } else {
                 sendPush(message)
             }
-        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-03-27") {		//EASTER
+        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2017-04-16") {		//EASTER
             for (light in settings.lights) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
@@ -148,8 +148,8 @@ void sunsetHandler(evt) {
             } else {
                 sendPush(message)
             }
-        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-04-22"
-        			|| todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-04-28") {	//PASSOVER
+        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2017-04-10"
+        			|| todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2017-04-17") {	//PASSOVER
             for (light in settings.lights) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
@@ -167,7 +167,7 @@ void sunsetHandler(evt) {
             } else {
                 sendPush(message)
             }
-        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-05-08") {		//MOTHER'S DAY
+        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2017-05-14") {		//MOTHER'S DAY
             for (light in settings.lights) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
@@ -220,7 +220,7 @@ void sunsetHandler(evt) {
             } else {
                 sendPush(message)
             }
-        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-06-19") {		//FATHER'S DAY
+        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2017-06-18") {		//FATHER'S DAY
             for (light in settings.lights) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
@@ -256,7 +256,7 @@ void sunsetHandler(evt) {
             } else {
                 sendPush(message)
             }
-        } else if (todayDate.format("MM-dd",TimeZone.getTimeZone('US/Eastern')) == "07-08") {				//ELIZABETH LAKE FIREWORKS
+        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-07-08") {		//ELIZABETH LAKE FIREWORKS
             for (light in settings.lights) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
@@ -274,8 +274,8 @@ void sunsetHandler(evt) {
             } else {
                 sendPush(message)
             }
-        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-10-02"
-        			|| todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-10-03") {	//ROSH HASHANAH
+        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2017-09-20"
+        			|| todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2017-09-21") {	//ROSH HASHANAH
             for (light in settings.lights) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
@@ -293,7 +293,7 @@ void sunsetHandler(evt) {
             } else {
                 sendPush(message)
             }
-        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-10-11") {		//YOM KIPPUR
+        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2017-09-29") {		//YOM KIPPUR
             for (light in settings.lights) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
@@ -388,7 +388,8 @@ void sunsetHandler(evt) {
             } else {
                 sendPush(message)
             }
-        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2016-12-29") {		//HANUKKAH
+        } else if (todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2017-12-12"
+                    || todayDate.format("yyyy-MM-dd",TimeZone.getTimeZone('US/Eastern')) == "2017-12-19") {		//HANUKKAH
             for (light in settings.lights) {
                 light.on()
                 if (light.displayName ==~ /^.*\bGardenspots\b.*$/) {
