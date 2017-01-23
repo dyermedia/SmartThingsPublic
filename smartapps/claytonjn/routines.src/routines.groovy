@@ -83,7 +83,7 @@ void routineHandler(evt) {
         settings.nightSwitchesOffPriority?.off()
         settings.garageDoors?.close()
         settings.locks?.lock()
-        settings.nightSpeakers?.playTrackAtVolume("https://dl.dropboxusercontent.com/s/ja5gx0rd593n2jd/GreenNoiseTenHours.mp3", settings.nightVolume)
+        settings.nightSpeakers?.playTrackAtVolume("https://f001.backblazeb2.com/file/SmartThings/GreenNoiseTenHours.mp3", settings.nightVolume)
         settings.thermostats?.setThermostatProgram("Sleep", "nextTransition")
         settings.ceilingFans?.setSleepOn()
         settings.nightSwitchesOff?.off()
