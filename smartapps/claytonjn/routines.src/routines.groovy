@@ -26,7 +26,7 @@ definition(
 
 preferences {
 	page(name: "page", install: true, uninstall: true) {
-        section("Title") {
+        section("Preferences") {
             paragraph "Runs when a Routine is triggered."
             input "thermostats", "capability.thermostat", title: "Thermostat(s)", multiple: true, required: false
             input "locks", "capability.lock", title: "Door Lock(s)", multiple: true, required: false
@@ -70,7 +70,7 @@ void routineHandler(evt) {
         setLocationMode("Home")
         settings.thermostats?.setThermostatProgram("Home", "indefinite")
     } else if (evt.displayName == "Away" || evt.value == "away") {
-    	sendLocationEvent(name: "alarmSystemStatus", value: "away")
+    	//sendLocationEvent(name: "alarmSystemStatus", value: "away")
         settings.garageDoors?.close()
         settings.locks?.lock()
         setLocationMode("Away")
