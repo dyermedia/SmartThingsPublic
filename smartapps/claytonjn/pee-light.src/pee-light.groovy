@@ -30,7 +30,9 @@ preferences {
             paragraph "Turns on light(s) when someone uses the bathroom in the middle of the night."
             input "lights", "capability.switch", title: "Light(s)", multiple: true
             input "motions", "capability.motionSensor", title: "Motion(s)", multiple: true
+            input "minutes", "number", title: "Minutes without motion before turning off light(s)"
             mode(title: "Set for specific mode(s)")
+            label title: "Assign a name", required: false
         }
     }
 }
@@ -58,7 +60,7 @@ void motionHandler(evt) {
         settings.lights?.setLevel(1)
         settings.lights?.on()
     } else if (evt.value == "inactive") {
-        runIn(60*2, lightsOff)
+        runIn(60*settings.minutes, lightsOff)
     }
 }
 
