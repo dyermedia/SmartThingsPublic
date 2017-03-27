@@ -31,6 +31,7 @@ preferences {
             input "lights", "capability.switch", title: "\"Utility\" Light(s)", multiple: true
             input "motions", "capability.motionSensor", title: "Motion(s)", multiple: true
             input "minutes", "number", title: "Minutes without motion before turning off light(s)"
+            mode(title: "Set for specific mode(s)")
             label title: "Assign a name", required: false
         }
     }
@@ -54,13 +55,11 @@ def initialize() {
 }
 
 void motionHandler(evt) {
-	if (location.mode in ["Home", "Night"]) {
-        if (evt.value == "active") {
-            unschedule(lightsOff)
-            settings.lights?.on()
-        } else if (evt.value == "inactive") {
-            runIn(60*settings.minutes, lightsOff)
-        }
+    if (evt.value == "active") {
+        unschedule(lightsOff)
+        settings.lights?.on()
+    } else if (evt.value == "inactive") {
+        runIn(60*settings.minutes, lightsOff)
     }
 }
 
