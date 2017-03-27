@@ -26,10 +26,11 @@ definition(
 
 preferences {
 	page(name: "page", install: true, uninstall: true) {
-        section("Title") {
-            paragraph "Turns on light(s) when someone uses the bathroom in the middle of the night"
+        section("Preferences") {
+            paragraph "Turns on light(s) when someone uses the bathroom in the middle of the night."
             input "lights", "capability.switch", title: "Light(s)", multiple: true
             input "motions", "capability.motionSensor", title: "Motion(s)", multiple: true
+            mode(title: "Set for specific mode(s)")
         }
     }
 }
@@ -52,14 +53,12 @@ def initialize() {
 }
 
 void motionHandler(evt) {
-	if (location.mode in ["Night"]) {
-        if (evt.value == "active") {
-            unschedule(lightsOff)
-            settings.lights?.setLevel(50)
-            settings.lights?.on()
-        } else if (evt.value == "inactive") {
-            runIn(60*2, lightsOff)
-        }
+    if (evt.value == "active") {
+        unschedule(lightsOff)
+        settings.lights?.setLevel(1)
+        settings.lights?.on()
+    } else if (evt.value == "inactive") {
+        runIn(60*2, lightsOff)
     }
 }
 
