@@ -59,17 +59,17 @@ def updated() {
 
 def initialize() {
 	subscribe(location, "routineExecuted", routineHandler)
-    subscribe(location, "alarmSystemStatus", routineHandler)
+    //subscribe(location, "alarmSystemStatus", routineHandler)
 }
 
 void routineHandler(evt) {
-	if (evt.displayName == "Home" || evt.value == "off") {
+	if (evt.displayName == "Home"/* || evt.value == "off"*/) {
     	sendLocationEvent(name: "alarmSystemStatus", value: "off")
         settings.homeSwitchesOn?.on()
         settings.homeSwitchesOff?.off()
         setLocationMode("Home")
         settings.thermostats?.setThermostatProgram("Home", "indefinite")
-    } else if (evt.displayName == "Away" || evt.value == "away") {
+    } else if (evt.displayName == "Away"/* || evt.value == "away"*/) {
     	//sendLocationEvent(name: "alarmSystemStatus", value: "away")
         settings.garageDoors?.close()
         settings.locks?.lock()
