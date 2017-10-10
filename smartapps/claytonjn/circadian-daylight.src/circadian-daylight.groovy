@@ -63,13 +63,14 @@ iconX3Url: "https://raw.githubusercontent.com/claytonjn/SmartThingsPublic/Circad
 )
 
 preferences {
-    page(name: "bulbsPreferences", nextPage: "dimmingPreferences", install: false, uninstall: true) {
+    page(name: "bulbsPreferences", nextPage: "offsetPreferences", install: false, uninstall: true) {
         section("Select each bulb in only one section. Color Temperature bulbs should be most accurate at reflecting natural light.") {
             input "ctBulbs", "capability.colorTemperature", title: "Color Temperature Bulbs", multiple: true, required: false
             input "cBulbs", "capability.colorControl", title: "Color Bulbs", multiple: true, required: false
             input "dBulbs", "capability.switchLevel", title: "Dimming Bulbs", multiple: true, required: false
         }
     }
+    page(name: "offsetPreferences", content: "offsetPreferences")
     page(name: "dimmingPreferences", content: "dimmingPreferences")
     page(name: "sleepPreferences", title: "Sleep Settings", nextPage: "disablePreferences", install: false, uninstall: true) {
         section {
@@ -95,6 +96,18 @@ preferences {
         section("Child SmartApp Name"){
             label title: "Assign a name", required: false
         }
+    }
+}
+
+def offsetPreferences() {
+    if (ctBulbs || cbulbs) {
+        return page(name: "offsetPreferences", nextPage: "dimmingPreferences", install: false, uninstall: true) {
+            section("Enter an offset for the Color Temperature value. The is helpful if you are using various types of bulbs that do not accurately represent color temperatures.") {
+                input "ctOffset", "number", title: "Color Temperature Offset (K)", required: true, defaultValue: 0
+            }
+        }
+    } else {
+        return dimmingPreferences()
     }
 }
 
@@ -195,10 +208,10 @@ private void calcBrightness(sunriseAndSunset) {
 private void calcSleepColorTemperature() {
     switch (settings.sTemp) {
         case "Campfire":
-            state.colorTemperature = 2000
+            state.colorTemperature = 2000 + ctOffset
             break
         case "Moonlight":
-            state.colorTemperature = 4100
+            state.colorTemperature = 4100 + ctOffset
             break
     }
     log.debug "Color Temperature set to ${state.colorTemperature}"
@@ -263,7 +276,7 @@ def bulbsHandler(evt = NULL, sunriseAndSunset = NULL) {
     }
 
     if (sunriseAndSunset != NULL) { calcBrightness(sunriseAndSunset) }
-    state.colorTemperature = parent.getColorTemperature()
+    state.colorTemperature = parent.getColorTemperature() + ctOffset
     log.debug "Color Temperature set to ${state.colorTemperature}"
 
     //Behavior in sleep mode
@@ -297,7 +310,7 @@ def bulbHandler(evt) {
         if(dSwitch.currentSwitch == "on") { return }
     }
 
-    state.colorTemperature = parent.getColorTemperature()
+    state.colorTemperature = parent.getColorTemperature() + ctOffset
     log.debug "Color Temperature set to ${state.colorTemperature}"
 
     //Behavior in sleep mode
