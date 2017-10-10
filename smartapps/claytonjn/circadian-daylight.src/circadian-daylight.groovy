@@ -101,7 +101,7 @@ preferences {
 
 def offsetPreferences() {
     if (ctBulbs || cbulbs) {
-        return page(name: "offsetPreferences", nextPage: "dimmingPreferences", install: false, uninstall: true) {
+        return dynamicPage(name: "offsetPreferences", nextPage: "dimmingPreferences", install: false, uninstall: true) {
             section("Enter an offset for the Color Temperature value. The is helpful if you are using various types of bulbs that do not accurately represent color temperatures.") {
                 input "ctOffset", "number", title: "Color Temperature Offset (K)", required: true, defaultValue: 0
             }
