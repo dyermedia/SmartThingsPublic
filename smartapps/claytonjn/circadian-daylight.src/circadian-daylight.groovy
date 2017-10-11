@@ -208,10 +208,10 @@ private void calcBrightness(sunriseAndSunset) {
 private void calcSleepColorTemperature() {
     switch (settings.sTemp) {
         case "Campfire":
-            state.colorTemperature = 2000 + ctOffset
+            state.colorTemperature = 2000 + settings.ctOffset
             break
         case "Moonlight":
-            state.colorTemperature = 4100 + ctOffset
+            state.colorTemperature = 4100 + settings.ctOffset
             break
     }
     log.debug "Color Temperature set to ${state.colorTemperature}"
@@ -276,13 +276,17 @@ def bulbsHandler(evt = NULL, sunriseAndSunset = NULL) {
     }
 
     if (sunriseAndSunset != NULL) { calcBrightness(sunriseAndSunset) }
-    state.colorTemperature = parent.getColorTemperature() + ctOffset
-    log.debug "Color Temperature set to ${state.colorTemperature}"
+    if (settings.ctBulbs || settings.cBulbs) {
+        state.colorTemperature = parent.getColorTemperature() + settings.ctOffset
+        log.debug "Color Temperature set to ${state.colorTemperature}"
+    }
 
     //Behavior in sleep mode
     if(location.mode in settings.sModes) {
         calcSleepBrightness()
-        calcSleepColorTemperature()
+        if (settings.ctBulbs || settings.cBulbs) {
+            calcSleepColorTemperature()
+        }
     }
 
     //Minimize reading state variables
@@ -310,13 +314,17 @@ def bulbHandler(evt) {
         if(dSwitch.currentSwitch == "on") { return }
     }
 
-    state.colorTemperature = parent.getColorTemperature() + ctOffset
-    log.debug "Color Temperature set to ${state.colorTemperature}"
+    if (settings.ctBulbs || settings.cBulbs) {
+        state.colorTemperature = parent.getColorTemperature() + settings.ctOffset
+        log.debug "Color Temperature set to ${state.colorTemperature}"
+    }
 
     //Behavior in sleep mode
     if(location.mode in settings.sModes) {
         calcSleepBrightness()
-        calcSleepColorTemperature()
+        if (settings.ctBulbs || settings.cBulbs) {
+            calcSleepColorTemperature()
+        }
     }
 
     if(evt.device.deviceNetworkId in settings.ctBulbs?.deviceNetworkId) {
