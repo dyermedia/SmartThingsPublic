@@ -50,7 +50,7 @@
 *sets up variables
 */
 metadata {
- definition(name: "Lightify Dimming Switch- Zigbee", namespace: "adamoutler", author: "Adam Amber House") {
+ definition(name: "Lightify Dimming Switch- Zigbee6", namespace: "adamoutler", author: "Adam Amber House") {
   capability "Battery"
   capability "Button"
   capability "Switch Level"
@@ -90,6 +90,10 @@ preferences {
   section("Device5") {
    input("device5", "string", title: "Device Network ID 5", description: "The Device Network Id", defaultValue: "", type: "capability.switch", required: false, displayDuringSetup: false)
    input("end5", "string", title: "Device Endpoint ID 5", description: "endpointId from Data Section of device", defaultValue: "", required: false, displayDuringSetup: false)
+  }
+  section("Device6") {
+   input("device6", "string", title: "Device Network ID 6", description: "The Device Network Id", defaultValue: "", type: "capability.switch", required: false, displayDuringSetup: false)
+   input("end6", "string", title: "Device Endpoint ID 6", description: "endpointId from Data Section of device", defaultValue: "", required: false, displayDuringSetup: false)
   }
     
  }
@@ -152,11 +156,11 @@ public String getInfo(){
  *returns: Arraylist<[address,endpoint]>
  */
 final ArrayList < String[] > getDevices() {
- String[] devs = [settings.device1, settings.device2, settings.device3, settings.device4, settings.device5]
- if (devs == [null, null, null, null, null]) log.info("------No devices configured in $device preferences--------")
- String[] ends = [end1, end2, end3, end4, end5]
+ String[] devs = [settings.device1, settings.device2, settings.device3, settings.device4, settings.device5, settings.device6]
+ if (devs == [null, null, null, null, null, null]) log.info("------No devices configured in $device preferences--------")
+ String[] ends = [end1, end2, end3, end4, end, end6]
  ArrayList < String[] > list = new ArrayList < > ([])
- for (int i = 0; i < 5; i++) {
+ for (int i = 0; i < 6; i++) {
   if (devs[i] != null) {
    list.add([devs[i], ends[i]])
   }
