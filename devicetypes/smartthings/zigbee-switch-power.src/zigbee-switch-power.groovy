@@ -23,12 +23,7 @@ metadata {
         capability "Health Check"
         capability "Light"
 
-        fingerprint profileId: "0104", inClusters: "0000, 0003, 0004, 0005, 0006, 0B04"
-        fingerprint profileId: "0104", inClusters: "0000, 0003, 0004, 0005, 0006, 0702"
-        fingerprint profileId: "0104", inClusters: "0000, 0003, 0004, 0005, 0006, 0702, 0B05", outClusters: "0003, 000A, 0019", manufacturer: "Jasco Products", model: "45853", deviceJoinName: "GE ZigBee Plug-In Switch"
-        fingerprint profileId: "0104", inClusters: "0000, 0003, 0004, 0005, 0006, 0702, 0B05", outClusters: "000A, 0019", manufacturer: "Jasco Products", model: "45856", deviceJoinName: "GE ZigBee In-Wall Switch"
-        fingerprint profileId: "0104", inClusters: "0000, 0003, 0004, 0005, 0006, 000F, 0B04", outClusters: "0019", manufacturer: "SmartThings", model: "outletv4", deviceJoinName: "Outlet"
-    }
+}
 
     tiles(scale: 2) {
         multiAttributeTile(name:"switch", type: "lighting", width: 6, height: 4, canChangeIcon: true){
@@ -84,23 +79,7 @@ def refresh() {
 }
 
 def configure() {
-    log.debug "in configure()"
-    return configureHealthCheck()
+log.debug "Configuring Reporting and Bindings."
+    zigbee.onOffConfig() + zigbee.simpleMeteringPowerConfig() + zigbee.electricMeasurementPowerConfig() + zigbee.onOffRefresh() + zigbee.simpleMeteringPowerRefresh() + zigbee.electricMeasurementPowerRefresh()
 }
 
-def configureHealthCheck() {
-    Integer hcIntervalMinutes = 12
-    sendEvent(name: "checkInterval", value: hcIntervalMinutes * 60, displayed: false, data: [protocol: "zigbee", hubHardwareId: device.hub.hardwareID])
-    return refresh()
-}
-
-def updated() {
-    log.debug "in updated()"
-    // updated() doesn't have it's return value processed as hub commands, so we have to send them explicitly
-    def cmds = configureHealthCheck()
-    cmds.each{ sendHubCommand(new physicalgraph.device.HubAction(it)) }
-}
-
-def ping() {
-    return zigbee.onOffRefresh()
-}
