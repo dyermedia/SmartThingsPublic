@@ -136,16 +136,16 @@ public String getInfo(){
  */
 final ArrayList < String[] > getDevices() {
  String[] devs = []
- /*if (settings.devices == null) {
+ if (settings.devices == null) {
   log.info("------No devices configured in $device preferences--------")
  }
  else {
   devs = settings.devices.tokenize(',')
- }*/
+ }
 
  ArrayList < String[] > list = new ArrayList < > ([])
  for (int i = 0; i < devs.length; i++) {
-  list.add([devs[i], end)
+  list.add([devs[i], end])
  }
  return list
 }
