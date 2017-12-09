@@ -71,31 +71,10 @@ metadata {
 
 
 preferences {
-  section("Device1") {
-   input("device1", "string", title: "Device Network ID 1", description: "The Device Network Id", defaultValue: "", type: "capability.switch", required: false, displayDuringSetup: false)
-   input("end1", "string", title: "Device Endpoint ID 1", description: "endpointId from Data Section of device", defaultValue: "", required: false, displayDuringSetup: false)
-  }
-  section("Device2") {
-   input("device2", "string", title: "Device Network ID 2", description: "The Device Network Id", defaultValue: "", type: "capability.switch", required: false, displayDuringSetup: false)
-   input("end2", "string", title: "Device Endpoint ID 2", description: "endpointId from Data Section of device", defaultValue: "", required: false, displayDuringSetup: false)
-  }
-  section("Device3") {
-   input("device3", "string", title: "Device Network ID 3", description: "The Device Network Id", defaultValue: "", type: "capability.switch", required: false, displayDuringSetup: false)
-   input("end3", "string", title: "Device Endpoint ID 3", description: "endpointId from Data Section of device", defaultValue: "", required: false, displayDuringSetup: false)
-  }
-  section("Device4") {
-   input("device4", "string", title: "Device Network ID 4", description: "The Device Network Id", defaultValue: "", type: "capability.switch", required: false, displayDuringSetup: false)
-   input("end4", "string", title: "Device Endpoint ID 4", description: "endpointId from Data Section of device", defaultValue: "", required: false, displayDuringSetup: false)
-  }
-  section("Device5") {
-   input("device5", "string", title: "Device Network ID 5", description: "The Device Network Id", defaultValue: "", type: "capability.switch", required: false, displayDuringSetup: false)
-   input("end5", "string", title: "Device Endpoint ID 5", description: "endpointId from Data Section of device", defaultValue: "", required: false, displayDuringSetup: false)
-  }
-  section("Device6") {
-   input("device6", "string", title: "Device Network ID 6", description: "The Device Network Id", defaultValue: "", type: "capability.switch", required: false, displayDuringSetup: false)
-   input("end6", "string", title: "Device Endpoint ID 6", description: "endpointId from Data Section of device", defaultValue: "", required: false, displayDuringSetup: false)
-  }
-    
+  section("Devices") {
+   input("devices", "string", title: "Device Network IDs", description: "The Device Network Ids", defaultValue: "", required: false, displayDuringSetup: false)
+   input("end", "string", title: "Device Endpoint ID", description: "endpointId from Data Section of device", defaultValue: "", required: false, displayDuringSetup: false)
+  }    
  }
 
 
@@ -156,14 +135,17 @@ public String getInfo(){
  *returns: Arraylist<[address,endpoint]>
  */
 final ArrayList < String[] > getDevices() {
- String[] devs = [settings.device1, settings.device2, settings.device3, settings.device4, settings.device5, settings.device6]
- if (devs == [null, null, null, null, null, null]) log.info("------No devices configured in $device preferences--------")
- String[] ends = [end1, end2, end3, end4, end, end6]
+ String[] devs = []
+ if (settings.devices == null) {
+  log.info("------No devices configured in $device preferences--------")
+ }
+ else {
+  devs = settings.devices.tokenize(',')
+ }
+
  ArrayList < String[] > list = new ArrayList < > ([])
- for (int i = 0; i < 6; i++) {
-  if (devs[i] != null) {
-   list.add([devs[i], ends[i]])
-  }
+ for (int i = 0; i < devs.length; i++) {
+  list.add([devs[i], end)
  }
  return list
 }
